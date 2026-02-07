@@ -1,0 +1,445 @@
+/* ========================================
+   CSS Variables - Intel Theme
+   ======================================== */
+:root {
+  /* Intel Brand Colors */
+  --intel-blue: #0068b5;
+  --intel-blue-light: #0078d4;
+  --intel-blue-dark: #005a9e;
+  --white: #ffffff;
+  --off-white: #f8f9fa;
+  --gray-light: #e8eef3;
+  --gray-medium: #6c757d;
+  --text-dark: #212529;
+  
+  /* Spacing System */
+  --spacing-xs: clamp(0.5rem, 1vw, 0.75rem);
+  --spacing-sm: clamp(0.75rem, 2vw, 1rem);
+  --spacing-md: clamp(1rem, 3vw, 1.5rem);
+  --spacing-lg: clamp(1.5rem, 4vw, 2rem);
+  --spacing-xl: clamp(2rem, 5vw, 3rem);
+  --spacing-2xl: clamp(3rem, 6vw, 4rem);
+  
+  /* Typography */
+  --font-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-size-sm: clamp(0.875rem, 1vw, 1rem);
+  --font-size-base: clamp(1rem, 1.5vw, 1.125rem);
+  --font-size-lg: clamp(1.25rem, 2vw, 1.5rem);
+  --font-size-xl: clamp(1.75rem, 3vw, 2.25rem);
+  --font-size-2xl: clamp(2.5rem, 5vw, 3.5rem);
+  
+  /* Effects */
+  --shadow-sm: 0 2px 4px rgba(0, 104, 181, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 104, 181, 0.12);
+  --shadow-lg: 0 8px 24px rgba(0, 104, 181, 0.18);
+  --shadow-glow: 0 0 0 3px rgba(0, 104, 181, 0.15);
+  
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  
+  /* Transitions */
+  --transition-fast: 200ms ease;
+  --transition-base: 300ms ease;
+  --transition-slow: 500ms ease;
+}
+
+/* ========================================
+   Reset & Base Styles
+   ======================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-base);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--text-dark);
+  background: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ========================================
+   Header / Hero Section
+   ======================================== */
+header {
+  background: linear-gradient(135deg, var(--intel-blue) 0%, var(--intel-blue-dark) 100%);
+  color: var(--white);
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle tech pattern background */
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.5;
+}
+
+header div {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Intel Logo Sizing */
+header img {
+  height: clamp(40px, 8vw, 60px);
+  width: auto;
+  margin-bottom: var(--spacing-md);
+  filter: brightness(0) invert(1); /* Make logo white */
+}
+
+header h1 {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  letter-spacing: -0.02em;
+}
+
+header p {
+  font-size: var(--font-size-base);
+  opacity: 0.95;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ========================================
+   Timeline Section
+   ======================================== */
+section {
+  padding: var(--spacing-2xl) var(--spacing-md);
+  position: relative;
+  background: transparent;
+}
+
+/* Desktop: Horizontal Scrolling Timeline */
+@media (min-width: 1024px) {
+  section {
+    display: flex;
+    gap: var(--spacing-lg);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding: var(--spacing-md);
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    /* Timeline connector line */
+    background-image: linear-gradient(
+      to right,
+      transparent 0%,
+      var(--intel-blue) 10%,
+      var(--intel-blue) 90%,
+      transparent 100%
+    );
+    background-size: 100% 2px;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Custom scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: var(--intel-blue) var(--gray-light);
+  }
+  
+  section::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  section::-webkit-scrollbar-track {
+    background: var(--gray-light);
+    border-radius: 4px;
+  }
+  
+  section::-webkit-scrollbar-thumb {
+    background: var(--intel-blue);
+    border-radius: 4px;
+  }
+  
+  section::-webkit-scrollbar-thumb:hover {
+    background: var(--intel-blue-dark);
+  }
+}
+
+/* Mobile: Vertical Stacked Timeline */
+@media (max-width: 768px) {
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+/* Tablet: Grid Layout */
+@media (min-width: 769px) and (max-width: 1023px) {
+  section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+/* ========================================
+   Timeline Cards (Milestones)
+   ======================================== */
+section > div {
+  background: var(--white);
+  border: 2px solid var(--gray-light);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  min-width: 320px;
+  max-width: 400px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: 
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base);
+}
+
+/* Mobile: Full width cards */
+@media (max-width: 768px) {
+  section > div {
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Tablet: Responsive width */
+@media (min-width: 769px) and (max-width: 1023px) {
+  section > div {
+    min-width: 280px;
+    max-width: 100%;
+  }
+}
+
+/* Individual Card Backgrounds */
+section > div:nth-child(1) {
+  background: 
+    linear-gradient(rgba(255, 255, 255, 0.80), rgba(255, 255, 255, 0.80)),
+    url('img/1.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+section > div:nth-child(2) {
+  background: 
+    linear-gradient(rgba(255, 255, 255, 0.80), rgba(255, 255, 255, 0.80)),
+    url('img/8.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+section > div:nth-child(3) {
+  background: 
+    linear-gradient(rgba(255, 255, 255, 0.80), rgba(255, 255, 255, 0.80)),
+    url('img/3.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+section > div:nth-child(4) {
+  background: 
+    linear-gradient(rgba(255, 255, 255, 0.80), rgba(255, 255, 255, 0.80)),
+    url('img/6.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+section > div:nth-child(5) {
+  background: 
+    linear-gradient(rgba(255, 255, 255, 0.80), rgba(255, 255, 255, 0.80)),
+    url('img/7.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+section > div:nth-child(6) {
+  background: 
+    linear-gradient(rgba(255, 255, 255, 0.80), rgba(255, 255, 255, 0.80)),
+    url('img/12.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+section > div:nth-child(7) {
+  background: 
+    linear-gradient(rgba(255, 255, 255, 0.80), rgba(255, 255, 255, 0.80)),
+    url('img/11.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+section > div:nth-child(8) {
+  background: 
+    linear-gradient(rgba(255, 255, 255, 0.80), rgba(255, 255, 255, 0.80)),
+    url('img/10.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+section > div:nth-child(9) {
+  background: 
+    linear-gradient(rgba(255, 255, 255, 0.80), rgba(255, 255, 255, 0.80)),
+    url('img/9.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Card Year Badge */
+section > div h2 {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--intel-blue), var(--intel-blue-dark));
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--spacing-md);
+  letter-spacing: 0.05em;
+  /* Add subtle depth */
+  box-shadow: 0 2px 8px rgba(0, 104, 181, 0.3);
+}
+
+/* Card Title */
+section > div h3 {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--intel-blue-dark);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.3;
+}
+
+/* Card Details (Hidden by default) */
+section > div p {
+  font-size: var(--font-size-base);
+  color: var(--gray-medium);
+  line-height: 1.7;
+  /* Hidden state */
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding-top: 0;
+  transition: 
+    max-height var(--transition-slow),
+    opacity var(--transition-base),
+    padding-top var(--transition-base);
+}
+
+/* ========================================
+   Hover & Focus States
+   ======================================== */
+
+/* Card Hover: Reveal Details */
+section > div:hover p,
+section > div:focus-within p {
+  max-height: 500px; /* Large enough for content */
+  opacity: 1;
+  padding-top: var(--spacing-sm);
+}
+
+/* Card Hover: Visual Effects */
+section > div:hover,
+section > div:focus-within {
+  transform: scale(1.03);
+  box-shadow: var(--shadow-lg);
+  /* Gradient border effect */
+  border-image: linear-gradient(135deg, var(--intel-blue-light), var(--intel-blue-dark)) 1;
+}
+
+/* Add blue glow on hover */
+section > div:hover::after,
+section > div:focus-within::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glow);
+  pointer-events: none;
+}
+
+/* Dim neighboring cards on hover (desktop only) */
+@media (min-width: 1024px) {
+  section:hover > div:not(:hover) {
+    opacity: 0.7;
+    transition: opacity var(--transition-base);
+  }
+}
+
+/* Focus Visible for Accessibility */
+section > div:focus-visible {
+  outline: 3px solid var(--intel-blue);
+  outline-offset: 4px;
+}
+
+/* ========================================
+   Footer Message
+   ======================================== */
+.timeline-hint {
+  text-align: center;
+  padding: var(--spacing-lg);
+  color: var(--gray-medium);
+  font-size: var(--font-size-sm);
+  font-style: italic;
+  opacity: 0;
+  animation: fadeIn 0.8s ease 1.2s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* ========================================
+   Accessibility: Reduced Motion
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  section > div:hover,
+  section > div:focus-within {
+    transform: none; /* Remove scale transform */
+  }
+}
+
+/* ========================================
+   Image Styling (for future use)
+   ======================================== */
+section > div img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+  margin: var(--spacing-sm) 0;
+  display: block;
+}
